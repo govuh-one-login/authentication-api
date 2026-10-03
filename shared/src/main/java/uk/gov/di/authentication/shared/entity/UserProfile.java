@@ -29,6 +29,15 @@ public class UserProfile {
     public static final String ATTRIBUTE_MFA_IDENTIFIER = "MFAIdentifier";
     public static final String ATTRIBUTE_LAST_SKIPPED_ADDING_PASSKEY = "LastSkippedAddingPasskey";
     public static final String ATTRIBUTE_LAST_SIGNED_IN = "LastSignedIn";
+    public static final String ATTRIBUTE_UH_FULL_NAME = "UhFullName";
+    public static final String ATTRIBUTE_UH_NAME_DECLARED_AT = "UhNameDeclaredAt";
+    public static final String ATTRIBUTE_ROBLOX_USER_ID = "RobloxUserID";
+    public static final String ATTRIBUTE_ROBLOX_USERNAME = "RobloxUsername";
+    public static final String ATTRIBUTE_ROBLOX_LINKED_AT = "RobloxLinkedAt";
+    public static final String ATTRIBUTE_DISCORD_USER_ID = "DiscordUserID";
+    public static final String ATTRIBUTE_DISCORD_USERNAME = "DiscordUsername";
+    public static final String ATTRIBUTE_DISCORD_LINKED_AT = "DiscordLinkedAt";
+    public static final String ATTRIBUTE_DISCORD_CONTACT_OPT_IN = "DiscordContactOptIn";
 
     private String email;
     private String subjectID;
@@ -47,6 +56,18 @@ public class UserProfile {
     private String mfaIdentifier;
     private String lastSkippedAddingPasskey;
     private String lastSignedIn;
+
+    // These optional attributes do not imply a legally verified identity or public authority.
+    // External provider identifiers must only be written by validated server-side OAuth callbacks.
+    private String uhFullName;
+    private String uhNameDeclaredAt;
+    private String robloxUserId;
+    private String robloxUsername;
+    private String robloxLinkedAt;
+    private String discordUserId;
+    private String discordUsername;
+    private String discordLinkedAt;
+    private boolean discordContactOptIn;
 
     public UserProfile() {}
 
@@ -291,5 +312,97 @@ public class UserProfile {
     public UserProfile withLastSignedIn(String lastSignedIn) {
         this.lastSignedIn = lastSignedIn;
         return this;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_UH_FULL_NAME)
+    public String getUhFullName() {
+        return uhFullName;
+    }
+
+    public void setUhFullName(String uhFullName) {
+        this.uhFullName = uhFullName;
+    }
+
+    public UserProfile withUhFullName(String uhFullName) {
+        this.uhFullName = uhFullName;
+        return this;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_UH_NAME_DECLARED_AT)
+    public String getUhNameDeclaredAt() {
+        return uhNameDeclaredAt;
+    }
+
+    public void setUhNameDeclaredAt(String uhNameDeclaredAt) {
+        this.uhNameDeclaredAt = uhNameDeclaredAt;
+    }
+
+    public UserProfile withUhNameDeclaredAt(String uhNameDeclaredAt) {
+        this.uhNameDeclaredAt = uhNameDeclaredAt;
+        return this;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_ROBLOX_USER_ID)
+    public String getRobloxUserId() {
+        return robloxUserId;
+    }
+
+    public void setRobloxUserId(String robloxUserId) {
+        this.robloxUserId = robloxUserId;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_ROBLOX_USERNAME)
+    public String getRobloxUsername() {
+        return robloxUsername;
+    }
+
+    public void setRobloxUsername(String robloxUsername) {
+        this.robloxUsername = robloxUsername;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_ROBLOX_LINKED_AT)
+    public String getRobloxLinkedAt() {
+        return robloxLinkedAt;
+    }
+
+    public void setRobloxLinkedAt(String robloxLinkedAt) {
+        this.robloxLinkedAt = robloxLinkedAt;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_DISCORD_USER_ID)
+    public String getDiscordUserId() {
+        return discordUserId;
+    }
+
+    public void setDiscordUserId(String discordUserId) {
+        this.discordUserId = discordUserId;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_DISCORD_USERNAME)
+    public String getDiscordUsername() {
+        return discordUsername;
+    }
+
+    public void setDiscordUsername(String discordUsername) {
+        this.discordUsername = discordUsername;
+    }
+
+    @DynamoDbAttribute(ATTRIBUTE_DISCORD_LINKED_AT)
+    public String getDiscordLinkedAt() {
+        return discordLinkedAt;
+    }
+
+    public void setDiscordLinkedAt(String discordLinkedAt) {
+        this.discordLinkedAt = discordLinkedAt;
+    }
+
+    @DynamoDbConvertedBy(BooleanToIntAttributeConverter.class)
+    @DynamoDbAttribute(ATTRIBUTE_DISCORD_CONTACT_OPT_IN)
+    public boolean isDiscordContactOptIn() {
+        return discordContactOptIn;
+    }
+
+    public void setDiscordContactOptIn(boolean discordContactOptIn) {
+        this.discordContactOptIn = discordContactOptIn;
     }
 }
